@@ -72,7 +72,12 @@ export default {
           window.location.href = '/staffs';
         })
         .catch(error => {
-          toastr.error("Staff couldn't be created.");
+          if (error.response.status == 500) {
+            toastr.error("Staff couldn't be created due to an unexpected error.");
+          } else if (error.response.status == 400) {
+            let nameErrors = error.response.data.name.join(', ');
+            toastr.warning("Couldn't not be created due to: <br/> Name: " + nameErrors);
+          }
           console.log(error.response);
         });
     }
