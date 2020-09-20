@@ -25,6 +25,15 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Staff</h3>
+                <div class="card-tools">
+                  <div class="input-group input-group-sm">
+                    <div class="input-group-append">
+                      <a href="/staffs/new" title="Create new" class="btn btn-default">
+                        <i class="fas fa-plus"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
