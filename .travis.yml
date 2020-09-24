@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 2.7.1
+services:
+  - postgresql
+before_script:
+  - nvm install 14.8.0
+  - yarn install --frozen-lockfile
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
