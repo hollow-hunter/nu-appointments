@@ -4,6 +4,7 @@ rvm:
 services:
   - postgresql
 before_script:
+  - nvm install 14.8.0
   - yarn
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
