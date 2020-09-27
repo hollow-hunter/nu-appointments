@@ -22,5 +22,22 @@ module Api
       post api_staffs_path, params: { name: 'Marie' }
       assert_response :created
     end
+
+    test 'show staff' do
+      s = staffs(:one)
+      get api_staff_path(s.id)
+      assert_response :ok
+      edited = JSON.parse(response.body)
+      assert_not_nil edited['name']
+    end
+
+    test 'edit staff' do
+      s = staffs(:one)
+      put api_staff_path(s.id), params: { name: 'Edited Mario' }
+      assert_response :ok
+      get api_staff_path(s.id)
+      edited = JSON.parse(response.body)
+      assert_equal 'Edited Mario', edited['name']
+    end
   end
 end
