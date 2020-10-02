@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :staffs
+  resources :clients
   namespace :api do
     resources :staffs
     resources :clients
