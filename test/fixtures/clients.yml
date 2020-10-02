@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+pato:
+  name: Pato
+  phone: 77399333
+  email: pato@icloud.com
+  code: NA
+
+lorem:
+  name: Lorem
+  phone: 88084844
+  email: lorem@icloud.com
+  code: 8848484SC
