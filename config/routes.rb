@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :appointments
   namespace :api do
     resources :staffs
-    resources :clients
+    resources :clients do
+      collection do
+        get '/code/:code', to: 'clients#code', as: :code
+      end
+    end
     resources :appointments
   end
   root to: 'pages#index'
