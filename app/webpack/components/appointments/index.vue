@@ -38,6 +38,7 @@ export default {
           let endTime = moment.utc(e.end_time);
           return {
             id: e.id,
+            url: '/appointments/' + e.id + '/edit',
             title: e.id,
             start: (startDate.add(startTime.hour(), 'h').add(startTime.minute(), 'm')).toDate(),
             end: (endDate.add(endTime.hour(), 'h').add(endTime.minute(), 'm')).toDate(),
