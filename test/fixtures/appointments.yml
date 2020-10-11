@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2020-10-04
+  start_time: 2020-10-04 10:00:00
+  end_time: 2020-10-04 10:30:00
+  status: 1
+  client: pato
+  staff: one
+
+two:
+  date: 2020-10-10
+  start_time: 2020-10-10 15:00:00
+  end_time: 2020-10-10 16:00:00
+  status: 0
+  client: pato
+  staff: two

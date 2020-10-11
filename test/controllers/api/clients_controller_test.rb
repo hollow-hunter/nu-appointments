@@ -40,4 +40,17 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     edited = JSON.parse(response.body)
     assert_equal 'Edited Pato', edited['name']
   end
+
+  test 'should get client by code' do
+    c = clients(:pato)
+    get code_api_clients_path(c.code)
+    assert_response :ok
+    response_client = JSON.parse(response.body)
+    assert_equal c.id, response_client['id'], 'Incorrect client'
+  end
+
+  test 'should get no_content by code when not found' do
+    get code_api_clients_path('usnln')
+    assert_response :no_content
+  end
 end

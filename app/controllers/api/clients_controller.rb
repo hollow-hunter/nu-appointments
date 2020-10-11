@@ -27,6 +27,15 @@ module Api
       end
     end
 
+    def code
+      client = Client.find_by_code(params[:code])
+      if client.nil?
+        head :no_content
+      else
+        render json: client, status: :ok
+      end
+    end
+
     private
 
     def set_client

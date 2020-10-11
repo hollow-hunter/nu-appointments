@@ -9,10 +9,12 @@ require("@rails/activestorage").start()
 require("channels")
 
 var jQuery = require("jquery");
-
+var moment = require('moment');
 // import jQuery from "jquery";
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
+global.moment = moment;
+window.moment = moment;
 
 require("bootstrap");
 require("admin-lte");
