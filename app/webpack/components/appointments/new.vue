@@ -116,6 +116,7 @@ import toastr from 'toastr'
 require('select2')
 require('tempusdominus-bootstrap-4')
 export default {
+  props: ['datePreselected'],
   data: function() {
     return {
       clientParameter: '',
@@ -123,7 +124,7 @@ export default {
       clientName: '',
       idStaff: '',
       staffs: null,
-      date: '',
+      date: this.datePreselected,
       startTime: '',
       endTime: ''
     }

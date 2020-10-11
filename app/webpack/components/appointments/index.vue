@@ -21,7 +21,8 @@ export default {
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
         initialView: 'dayGridMonth',
-        events: null
+        events: null,
+        dateClick: this.addEvent
       },
       appointmentsCount: 0
     }
@@ -54,6 +55,11 @@ export default {
         }
         console.log(error.response);
       });
+  },
+  methods: {
+    addEvent(info) {
+      window.location.href = '/appointments/new?datePreselected=' + info.dateStr;
+    }
   }
 }
 </script>
