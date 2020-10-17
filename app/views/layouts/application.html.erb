@@ -12,9 +12,19 @@
 
   <body class="sidebar-mini">
     <div class="wrapper">
-      <%= render partial: "layouts/header" %> <%= render partial:
-      "layouts/sidebar" %>
+      <%= render partial: "layouts/header" %>
+      <%= render partial: "layouts/sidebar" %>
       <div class="content-wrapper">
+        <% if notice %>
+          <div class="callout callout-info">
+            <p><%= notice %></p>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="callout callout-danger">
+            <p><%= alert %></p>
+          </div>
+        <% end %>
         <%= yield %>
       </div>
       <%= render partial: "layouts/footer" %>
