@@ -4,53 +4,62 @@
     <span class="brand-text font-weight-light">NU Appointment</span>
   </a>
 <!-- Sidebar -->
-  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 652px;"><div class="sidebar" style="min-height: 652px; overflow: hidden; width: auto; height: 652px;">
+  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 652px;">
+    <div class="sidebar" style="min-height: 652px; overflow: hidden; width: auto; height: 652px;">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="http://placehold.it/160x160" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a href="#" class="d-block">User Name</a>
-      </div>
+      <% if user_signed_in? %>
+        <div class="image">
+          <img src="http://placehold.it/160x160" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="<%= edit_user_registration_path %>" class="d-block"><%= current_user.email %></a>
+        </div>
+      <% else %>
+        <div class="info">
+          <a href="/login" class="d-block">Log in</a>
+        </div>
+      <% end %>
     </div>
 <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-             <li class="nav-item">
-               <a href="/" class="nav-link <%= 'active' if request.path == '/' %>">
-                 <i class="nav-icon fas fa-home"></i>
-                 <p>
-                   Home
-                 </p>
-               </a>
-             </li>
-             <li class="nav-item">
-               <a href="/staffs" class="nav-link <%= 'active' if request.path.include?('/staffs') %>">
-                 <i class="nav-icon fas fa-id-card"></i>
-                 <p>
-                   Staff
-                 </p>
-               </a>
-             </li>
-             <li class="nav-item">
-               <a href="/clients" class="nav-link <%= 'active' if request.path.include?('/clients') %>">
-                 <i class="nav-icon fas fa-users"></i>
-                 <p>
-                   Clients
-                 </p>
-               </a>
-             </li>
-             <li class="nav-item">
-               <a href="/appointments" class="nav-link <%= 'active' if request.path.include?('/appointments') %>">
-                 <i class="nav-icon fas fa-calendar"></i>
-                 <p>
-                   Appointments
-                 </p>
-               </a>
-             </li>
+             <% if user_signed_in? %>
+               <li class="nav-item">
+                 <a href="/" class="nav-link <%= 'active' if request.path == '/' %>">
+                   <i class="nav-icon fas fa-home"></i>
+                   <p>
+                     Home
+                   </p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="/staffs" class="nav-link <%= 'active' if request.path.include?('/staffs') %>">
+                   <i class="nav-icon fas fa-id-card"></i>
+                   <p>
+                     Staff
+                   </p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="/clients" class="nav-link <%= 'active' if request.path.include?('/clients') %>">
+                   <i class="nav-icon fas fa-users"></i>
+                   <p>
+                     Clients
+                   </p>
+                 </a>
+               </li>
+               <li class="nav-item">
+                 <a href="/appointments" class="nav-link <%= 'active' if request.path.include?('/appointments') %>">
+                   <i class="nav-icon fas fa-calendar"></i>
+                   <p>
+                     Appointments
+                   </p>
+                 </a>
+               </li>
+             <% end %>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
