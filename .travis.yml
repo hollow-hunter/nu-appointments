@@ -8,3 +8,10 @@ before_script:
   - yarn install --frozen-lockfile
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
+deploy:
+  provider: heroku
+  run: "rails db:migrate"
+  on:
+    tags: true
+  api_key:
+    secure: jXKcnScV1SY4pimelS27oBBUqkoMZsR2VI7rkqQatIoAh4gzivOJCTC99dIkDKPqWTtPEwt1WodWSqSr3hcCxk0KNCk719hkroCuuXWWSj2b0YjjubVukwvMTAga81LzorlsFIEQrbFw15scTb3LFrYBr0t7cWk8dxAnJ9N/GBbfToV7s6yPg5uqCvgQhLEJXgkBGo2Kjh/5VsibEy2K7lgEoYfbzzudny8u6US0Y+W0veSGu8GMlx6rW+8wzH+13Jvu3/Ty9lYrOcHxl7Y2JgrkjqcCNTmn7yBS0I/G+MSMUn854/mfG0mw9dKZsVq97IyFXOwsuLZ6+/cRbYwSwFXe9afYf8mgmPwqkAMQLOFBBXs6mfoUUbOPICIlgE5IaCAS/DvP5VO7dRhymivDALd3Cpo8xbm8PDr6G5HS7HGwMm4MpTQo9kCh1/EubqvJNgyykp2FeDZ/CKigPOCUAQkHEtxgx3ay+yPVFRW+nET++7n7N2+u0TUgT6nljoduzXZh9BWYwu2IiB6GdBCqqetAaZFV3gD7xDLD82TBkwnYeC1/8EFmmopdIo+q0188B5R6NLgS1Dx34EBuBSCAW0UBJd7kOUDTxvigCviK9G1pnkAkCkWc4Gj7y/etl/dCczh8pqU1JXiNtHgIwscCvJJo5WGyDDNAHPoCEYZz9hU=
