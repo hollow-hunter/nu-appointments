@@ -10,7 +10,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 branches:
   only:
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    - master
 deploy:
   provider: heroku
   run: "rails db:migrate"
