@@ -10,12 +10,15 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <% if user_signed_in? %>
         <div class="image">
-          <img src="http://placehold.it/160x160" class="img-circle elevation-2" alt="User Image">
+          <%= current_user.email[0].upcase %>
         </div>
         <div class="info">
           <a href="<%= edit_user_registration_path %>" class="d-block"><%= current_user.email %></a>
         </div>
       <% else %>
+        <div class="image">
+          <i class="nav-icon fas fa-lock"></i>
+        </div>
         <div class="info">
           <a href="/login" class="d-block">Log in</a>
         </div>
