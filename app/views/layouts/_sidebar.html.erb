@@ -54,13 +54,22 @@
                    </p>
                  </a>
                </li>
-               <li class="nav-item">
-                 <a href="/appointments" class="nav-link <%= 'active' if request.path.include?('/appointments') %>">
+               <li class="nav-item has-treeview <%= 'menu-open' if request.path.include?('/appointments') %>">
+                 <a href="#" class="nav-link <%= 'active' if request.path.include?('/appointments') %>">
                    <i class="nav-icon fas fa-calendar"></i>
                    <p>
                      Appointments
+                     <i class="fas fa-angle-left right"></i>
                    </p>
                  </a>
+                 <ul class="nav nav-treeview">
+                   <li class="nav-item">
+                     <a href="/appointments" class="nav-link <%= 'active' if request.path.include?('/appointments') %>">
+                       <i class="far far fa-calendar-alt"></i>
+                       <p>Global View</p>
+                     </a>
+                   </li>
+                 </ul>
                </li>
              <% end %>
       </ul>
