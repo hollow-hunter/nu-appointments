@@ -50,7 +50,6 @@ export default {
   data() {
     return {
       events: null,
-      status: ['pending', 'cancelled', 'done'],
       kanban: null
     }
   },
@@ -77,12 +76,16 @@ export default {
           }
         });
         this.loadKanban();
+        this.kanban.findBoard('board-cancelled').className += ' card card-danger';
+        this.kanban.findBoard('board-pending').className += ' card card-warning';
+        this.kanban.findBoard('board-done').className += ' card card-success';
       })
       .catch(error => {
+        console.log(error);
         if (error.response.status == 500) {
           toastr.error("There was an error trying get the appointments.");
+          console.log(error.response);
         }
-        console.log(error.response);
       });
   },
   methods: {
@@ -103,7 +106,7 @@ export default {
         boards: [{
             id: "board-pending",
             title: "Pending",
-            class: 'pending-board',
+            class: 'pending-board,card-header',
             item: pendingItems.map(p => {
               return {
                 id: "item-id-" + p.id.toString(),
@@ -114,7 +117,7 @@ export default {
           },
           {
             id: "board-cancelled",
-            class: 'cancelled-board',
+            class: 'cancelled-board,card-header',
             title: "Cancelled",
             item: cancelledItems.map(p => {
               return {
@@ -126,7 +129,7 @@ export default {
           },
           {
             id: "board-done",
-            class: 'done-board',
+            class: 'done-board,card-header',
             title: "Done",
             item: doneItems.map(p => {
               return {
