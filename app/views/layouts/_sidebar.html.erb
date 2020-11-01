@@ -64,9 +64,15 @@
                  </a>
                  <ul class="nav nav-treeview">
                    <li class="nav-item">
-                     <a href="/appointments" class="nav-link <%= 'active' if request.path.include?('/appointments') %>">
+                     <a href="/appointments" class="nav-link <%= 'active' if request.path == '/appointments' %>">
                        <i class="far far fa-calendar-alt"></i>
                        <p>Global View</p>
+                     </a>
+                   </li>
+                   <li class="nav-item">
+                     <a href="/appointments/status" class="nav-link <%= 'active' if request.path.include?('/appointments/status') %>">
+                       <i class="fas fa-pen-square"></i>
+                       <p>Status</p>
                      </a>
                    </li>
                  </ul>

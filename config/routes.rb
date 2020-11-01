@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   end
   resources :staffs
   resources :clients
-  resources :appointments
+  resources :appointments do
+    collection do
+      get '/status', to: 'appointments#status', as: :status
+    end
+  end
   namespace :api do
     resources :staffs
     resources :clients do
