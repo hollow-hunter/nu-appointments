@@ -38,10 +38,10 @@
                     Search
                   </button>
                   <ul class="dropdown-menu">
-                    <li class="dropdown-item" v-on:click="findClient('/api/clients/')" style="cursor: pointer;">
+                    <li class="dropdown-item" v-on:click="findClient('/api/clients/')">
                       By Id
                     </li>
-                    <li class="dropdown-item" v-on:click="findClient('/api/clients/code/')" style="cursor: pointer;">
+                    <li class="dropdown-item" v-on:click="findClient('/api/clients/code/')">
                       By Code
                     </li>
                   </ul>
