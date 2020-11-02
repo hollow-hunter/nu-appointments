@@ -34,7 +34,7 @@ module Api
     end
 
     def appointment_params
-      params.permit(:date, :start_time, :end_time, :client_id, :staff_id, :status)
+      params.permit(:id, :date, :start_time, :end_time, :client_id, :staff_id, :status)
     end
   end
 end
