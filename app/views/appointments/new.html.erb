@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <%= stylesheet_pack_tag 'appointments/new' %>
+<% end %>
 <div id="app">
   <new-appointment :date-preselected="'<%= params[:datePreselected] %>'"></new-appointment>
 </div>

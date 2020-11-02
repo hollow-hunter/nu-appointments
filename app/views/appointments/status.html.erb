@@ -1,4 +1,6 @@
-<%= stylesheet_pack_tag 'appointments/status' %>
+<% content_for :head do %>
+  <%= stylesheet_pack_tag 'appointments/status' %>
+<% end %>
 <div id="app">
   <status-appointments></status-appointments>
 </div>

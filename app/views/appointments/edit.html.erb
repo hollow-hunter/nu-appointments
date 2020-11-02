@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <%= stylesheet_pack_tag 'appointments/edit' %>
+<% end %>
 <div id="app">
   <edit-appointment :id="<%= params[:id] %>"></edit-appointment>
 </div>
