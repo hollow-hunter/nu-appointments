@@ -11,6 +11,11 @@ module NuAppointments
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
     config.exceptions_app = routes
+    excluded_routes = ->(env) { !env['PATH_INFO'].match(%r{^/api}) }
+    config.middleware.use OliveBranch::Middleware,
+                          inflection: 'camel',
+                          exclude_params: excluded_routes,
+                          exclude_response: excluded_routes
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
