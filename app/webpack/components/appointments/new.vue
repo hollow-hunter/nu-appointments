@@ -177,10 +177,10 @@ export default {
       axios
         .post('/api/appointments', {
           date: this.date,
-          start_time: this.startTime,
-          end_time: this.endTime,
-          client_id: this.idClient,
-          staff_id: this.idStaff
+          startTime: this.startTime,
+          endTime: this.endTime,
+          clientId: this.idClient,
+          staffId: this.idStaff
         })
         .then(response => {
           toastr.success('Appointment created.');

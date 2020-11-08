@@ -135,11 +135,11 @@ export default {
       .get('/api/appointments/' + this.id)
       .then(response => {
         this.date = response.data.date;
-        this.startTime = moment.utc(response.data.start_time).format('HH:mm');
-        this.endTime = moment.utc(response.data.end_time).format('HH:mm');
-        this.idClient = response.data.client_id;
+        this.startTime = moment.utc(response.data.startTime).format('HH:mm');
+        this.endTime = moment.utc(response.data.endTime).format('HH:mm');
+        this.idClient = response.data.clientId;
         this.clientParameter = this.idClient;
-        this.idStaff = response.data.staff_id;
+        this.idStaff = response.data.staffId;
         this.findClient('/api/clients/')
       })
       .catch(error => {
@@ -192,10 +192,10 @@ export default {
       axios
         .put('/api/appointments/' + this.id, {
           date: this.date,
-          start_time: this.startTime,
-          end_time: this.endTime,
-          client_id: this.idClient,
-          staff_id: this.idStaff
+          startTime: this.startTime,
+          endTime: this.endTime,
+          clientId: this.idClient,
+          staffId: this.idStaff
         })
         .then(response => {
           toastr.success('Appointment updated.');

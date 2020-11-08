@@ -61,8 +61,8 @@ export default {
         this.events = response.data.map(e => {
           let startDate = moment(e.date);
           let endDate = moment(e.date);
-          let startTime = moment.utc(e.start_time);
-          let endTime = moment.utc(e.end_time);
+          let startTime = moment.utc(e.startTime);
+          let endTime = moment.utc(e.endTime);
           return {
             id: e.id,
             url: '/appointments/' + e.id + '/edit',
