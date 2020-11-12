@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello <%= @client.name %></h1>
+    <p>
+      This email is to confirm your appointment was created for <%= @appointment.date.strftime %> at <%= @appointment.start_time.strftime '%H:%M' %>
+    </p>
+  </body>
+</html>
