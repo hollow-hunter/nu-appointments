@@ -92,6 +92,10 @@
                 </div>
                 <!-- /.form group -->
               </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" v-model="notify" id="notify">
+                <label class="form-check-label" for="notify">Notify client</label>
+              </div>
             </div>
             <!-- /.card-body -->
 
@@ -127,7 +131,8 @@ export default {
       staffs: null,
       date: this.datePreselected,
       startTime: '',
-      endTime: ''
+      endTime: '',
+      notify: false
     }
   },
   mounted() {
@@ -180,7 +185,8 @@ export default {
           startTime: this.startTime,
           endTime: this.endTime,
           clientId: this.idClient,
-          staffId: this.idStaff
+          staffId: this.idStaff,
+          notify: this.notify
         })
         .then(response => {
           toastr.success('Appointment created.');

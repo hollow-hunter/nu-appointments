@@ -9,7 +9,7 @@ module Api
     def create
       a = Appointment.new(appointment_params)
       if a.save
-        ClientMailer.appointment_created(a.client, a).deliver_later
+        ClientMailer.appointment_created(a.client, a).deliver_later if params[:notify]
         render json: a, status: :created, location: api_appointment_path(a)
       else
         render json: a.errors, status: :bad_request
