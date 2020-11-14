@@ -15,6 +15,14 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'new client', c['name'], "name wasn't saved"
   end
 
+  test 'create client with existing code' do
+    pato = clients(:pato)
+    post api_clients_path, params: { name: 'new client', phone: 4444, email: 'new@new.new', code: pato.code }
+    assert_response :bad_request
+    c = JSON.parse(response.body)
+    assert_not_nil c['code'], 'code is not errored'
+  end
+
   test 'create client with bad params' do
     post api_clients_path
     assert_response :bad_request
@@ -39,6 +47,15 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     get api_client_path(s.id)
     edited = JSON.parse(response.body)
     assert_equal 'Edited Pato', edited['name']
+  end
+
+  test "edit client with another client's code" do
+    s = clients(:pato)
+    lorem = clients(:lorem)
+    put api_client_path(s.id), params: { name: 'Edited Pato', code: lorem.code }
+    assert_response :bad_request
+    c = JSON.parse(response.body)
+    assert_not_nil c['code'], 'code is not errored'
   end
 
   test 'should get client by code' do
