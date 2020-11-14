@@ -28,7 +28,7 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form v-on:submit.prevent="saveClient" role="form">
+          <form v-on:submit.prevent="checkCode" role="form">
             <div class="card-body">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -44,7 +44,7 @@
               </div>
               <div class="form-group">
                 <label for="code" class="control-label">Code</label>
-                <input v-model="code" type="text" class="form-control" id="code" placeholder="Code">
+                <input v-model="code" type="text" class="form-control" id="code" required placeholder="Code">
               </div>
             </div>
             <!-- /.card-body -->
@@ -77,6 +77,20 @@ export default {
     }
   },
   methods: {
+    checkCode: function(){
+      axios
+        .get('/api/clients/code/' + this.code)
+        .then(response => {
+          if (response.status == 204) {
+            this.saveClient();
+          } else {
+            toastr.warning('The code is taken by another client.');
+          }
+        })
+        .catch(error => {
+          toastr.error("Client code couldn't be checked due to an unexpected error.");
+        });
+    },
     saveClient: function() {
       axios
         .post('/api/clients', {
