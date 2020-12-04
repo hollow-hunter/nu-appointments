@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'companies/create'
   devise_for :users
   devise_scope :user do
     get '/login', to: 'devise/sessions#new'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
       end
     end
     resources :appointments
+    resources :companies
   end
   root to: 'pages#index'
   get '/404', to: 'errors#not_found'
