@@ -2,12 +2,16 @@ require 'test_helper'
 require 'json'
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
-  test 'index gets all' do
+  test "index gets all clients from the user's company" do
+    current_user = users(:owner)
+    sign_in current_user
     get api_clients_path
-    assert_equal JSON.parse(response.body).size, clients.size, "index didn't get all staff"
+    assert_equal 1, JSON.parse(response.body).size, 'index got other staff'
   end
 
-  test 'create client' do
+  test "create client for the user's company" do
+    current_user = users(:owner)
+    sign_in current_user
     post api_clients_path, params: { name: 'new client', phone: 4444, email: 'new@new.new' }
     assert_response :created
     c = JSON.parse(response.body)
@@ -16,6 +20,8 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create client with existing code' do
+    current_user = users(:owner)
+    sign_in current_user
     pato = clients(:pato)
     post api_clients_path, params: { name: 'new client', phone: 4444, email: 'new@new.new', code: pato.code }
     assert_response :bad_request
@@ -24,6 +30,8 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create client with bad params' do
+    current_user = users(:owner)
+    sign_in current_user
     post api_clients_path
     assert_response :bad_request
     c = JSON.parse(response.body)

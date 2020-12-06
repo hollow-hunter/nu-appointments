@@ -11,3 +11,7 @@ one:
 two:
   email: admin@admin.com
   encrypted_password: lndodn
+owner:
+  email: owner@owner.com
+  encrypted_password: owner
+  company_id: 1
