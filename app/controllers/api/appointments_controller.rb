@@ -3,12 +3,13 @@ module Api
     before_action :set_appointment, only: %i[edit update show]
 
     def index
-      render json: Appointment.all, status: :ok
+      appointments = Appointment.all.select { |a| a.staff.company_id == current_user.company_id }
+      render json: appointments, status: :ok
     end
 
     def create
       a = Appointment.new(appointment_params)
-      if a.save
+      if a.check_company(current_user.company_id) && a.save
         ClientMailer.appointment_created(a.client, a).deliver_later if params[:notify]
         render json: a, status: :created, location: api_appointment_path(a)
       else
@@ -17,6 +18,8 @@ module Api
     end
 
     def update
+      return render(json: nil, status: :forbidden) if @appointment.staff.company_id != current_user.company_id
+
       if @appointment.update(appointment_params)
         render json: :show, status: :ok, location: api_appointment_path(@appointment)
       else
