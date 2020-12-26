@@ -6,7 +6,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     current_user = users(:owner)
     sign_in current_user
     get api_clients_path
-    assert_equal 1, JSON.parse(response.body).size, 'index got other staff'
+    assert_equal 1, JSON.parse(response.body).size, 'index included other clients'
   end
 
   test "create client for the user's company" do
