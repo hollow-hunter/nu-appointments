@@ -14,7 +14,15 @@
         <div class="card">
           <div class="card-body">
             <% if user_signed_in? %>
-              <span>Now you can start using the app.</span>
+              <% if @company %>
+                <span>
+                  You're in <%= @company.name %>
+                </span>
+              <% else %>
+                <span>
+                  You need to <a href="/companies/new">register your company</a> in order to use all features.
+                </span>
+              <% end %>
             <% else %>
               <span>Log in to start using the app.</span>
             <% end %>
