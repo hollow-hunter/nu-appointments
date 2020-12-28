@@ -8,9 +8,10 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Sign up</p>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <input type="hidden" name="invitation_code" value="<%= @invitation_code %>"/>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="input-group mb-3">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email', required: 'required' %>
+          <%= f.email_field :email, autofocus: @invitation_code.nil?, autocomplete: "email", class: 'form-control', placeholder: 'Email', required: 'required', readonly: !@invitation_code.nil? %>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -18,7 +19,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: 'Password', required: 'required' %>
+          <%= f.password_field :password, autofocus: !@invitation_code.nil?, autocomplete: "new-password", class: 'form-control', placeholder: 'Password', required: 'required' %>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
