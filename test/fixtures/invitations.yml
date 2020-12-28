@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+invitation_one_expired:
+  code: MyString
+  email: MyString
+  expires_in: 2020-12-27 19:27:17
+  company: one
+
+invitation_two:
+  code: MyString
+  email: MyString
+  expires_in: 2020-12-27 19:27:17
+  company: two
