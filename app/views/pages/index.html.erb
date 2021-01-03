@@ -16,7 +16,7 @@
             <% if user_signed_in? %>
               <% if @company %>
                 <span>
-                  You're in <%= @company.name %>
+                  You're in <%= @company.name %>. <a href="/invitations/new">Invite</a> someone.
                 </span>
               <% else %>
                 <span>

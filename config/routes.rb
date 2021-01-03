@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'invitations/new'
   get 'companies/new', to: 'companies#new'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
