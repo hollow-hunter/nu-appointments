@@ -7,6 +7,10 @@ class Invitation < ApplicationRecord
   before_save :set_expiration
   before_create :generate_code
 
+  def expired?(date_compared)
+    date_compared - expires_in > 24.hours
+  end
+
   private
 
   def set_expiration

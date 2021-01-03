@@ -2,15 +2,15 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  before_action :check_invitation, only: [:new]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   def new
-    invitation = Invitation.find_by_code(params[:code])
-    flash.notice = 'Invitation code expired' if invitation.nil?
-    @invitation_code = invitation&.code
+    flash.notice = 'Invitation code invalid.' if @invitation.nil?
+    @invitation_code = @invitation&.code
     super do |resource|
-      resource.email = invitation.email unless invitation.nil?
+      resource.email = @invitation&.email
     end
   end
 
@@ -52,6 +52,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:invitation_code, :company_id])
+  end
+
+  def check_invitation
+    @invitation = Invitation.find_by_code(params[:code])
+    return if @invitation.nil? || !@invitation.expired?(Time.now)
+
+    @invitation.destroy
+    @invitation = nil
   end
 
   # If you have extra params to permit, append them to the sanitizer.

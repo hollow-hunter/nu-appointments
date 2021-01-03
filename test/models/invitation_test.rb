@@ -20,4 +20,9 @@ class InvitationTest < ActiveSupport::TestCase
     assert i2.save, "invitation wasn't saved"
     assert_not_equal i.code, i2.code, 'codes were the same'
   end
+
+  test 'invitation is expired' do
+    i = Invitation.new expires_in: Time.new(2020,1,1,1,0,0)
+    assert i.expired? Time.new(2020,1,2,1,0,1)
+  end
 end
