@@ -7,7 +7,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     invitation = Invitation.find_by_code(params[:code])
-    @invitation_code = params[:code]
+    flash.notice = 'Invitation code expired' if invitation.nil?
+    @invitation_code = invitation&.code
     super do |resource|
       resource.email = invitation.email unless invitation.nil?
     end
@@ -17,7 +18,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     invitation = Invitation.find_by_code(params[:invitation_code])
     params[:user][:company_id] = invitation.company_id unless invitation.nil?
-    super
+    super do |resource|
+      invitation&.destroy
+    end
   end
 
   # GET /resource/edit
