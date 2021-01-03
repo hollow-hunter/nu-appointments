@@ -5,9 +5,11 @@ pato:
   phone: 77399333
   email: pato@icloud.com
   code: NA
+  company_id: 1
 
 lorem:
   name: Lorem
   phone: 88084844
   email: lorem@icloud.com
   code: 8848484SC
+  company_id: 2

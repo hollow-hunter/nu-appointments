@@ -51,4 +51,20 @@ class AppointmentTest < ActiveSupport::TestCase
     refute a.save, 'Appointment was saved'
     assert_not_nil a.errors.messages[:end_time], 'end_time error message is nil'
   end
+
+  test "client belongs to user's company" do
+    c = clients(:lorem)
+    s = staffs(:one)
+    current_user = users(:owner)
+    a = Appointment.new client_id: c.id, staff_id: s.id
+    refute a.check_company(current_user.company_id), 'company not checked'
+  end
+
+  test "staff belongs to user's company" do
+    c = clients(:pato)
+    s = staffs(:two)
+    current_user = users(:owner)
+    a = Appointment.new client_id: c.id, staff_id: s.id
+    refute a.check_company(current_user.company_id), 'company not checked'
+  end
 end

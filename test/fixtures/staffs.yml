@@ -2,6 +2,8 @@
 
 one:
   name: Mario
+  company_id: 1
 
 two:
   name: Maria
+  company_id: 2

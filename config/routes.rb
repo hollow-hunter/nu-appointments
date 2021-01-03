@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get 'invitations/new'
+  get 'companies/new', to: 'companies#new'
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     get '/login', to: 'devise/sessions#new'
     get '/register', to: 'devise/registrations#new'
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
     end
   end
   namespace :api do
+    post 'invitations', to: 'invitations#create'
     resources :staffs
     resources :clients do
       collection do
@@ -19,6 +22,7 @@ Rails.application.routes.draw do
       end
     end
     resources :appointments
+    resources :companies
   end
   root to: 'pages#index'
   get '/404', to: 'errors#not_found'

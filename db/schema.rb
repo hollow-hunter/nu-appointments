@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_021022) do
+ActiveRecord::Schema.define(version: 2020_12_27_232717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,13 +35,32 @@ ActiveRecord::Schema.define(version: 2020_10_14_021022) do
     t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
     t.index ["code"], name: "index_clients_on_code", unique: true
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.string "code"
+    t.string "email"
+    t.datetime "expires_in"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_invitations_on_company_id"
   end
 
   create_table "staffs", force: :cascade do |t|
     t.text "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "index_staffs_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,10 +71,13 @@ ActiveRecord::Schema.define(version: 2020_10_14_021022) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "appointments", "clients"
   add_foreign_key "appointments", "staffs"
+  add_foreign_key "invitations", "companies"
+  add_foreign_key "staffs", "companies"
 end

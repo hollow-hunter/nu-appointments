@@ -2,12 +2,13 @@ module Api
   class ClientsController < ActionController::API
     before_action :set_client, only: %i[show update]
     def index
-      clients = Client.all
+      clients = Client.all.select { |c| c.company_id == current_user.company_id }
       render json: clients, status: :ok
     end
 
     def create
       client = Client.new client_params
+      client.company_id = current_user.company_id
       if client.save
         render json: client, status: :created
       else
