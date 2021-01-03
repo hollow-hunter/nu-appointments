@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    invitation = Invitation.find_by_code(params[:code])
+    invitation = Invitation.find_by_code(params[:invitation_code])
     params[:user][:company_id] = invitation.company_id unless invitation.nil?
     super
   end
