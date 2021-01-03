@@ -2,6 +2,7 @@ require 'securerandom'
 
 class Invitation < ApplicationRecord
   belongs_to :company
+  validate :email_existence
 
   before_save :set_expiration
   before_create :generate_code
@@ -14,5 +15,10 @@ class Invitation < ApplicationRecord
 
   def generate_code
     self.code = SecureRandom.hex
+  end
+
+  def email_existence
+    u = User.find_by_email(email)
+    errors.add(:email, 'Email is already registered') unless u.nil?
   end
 end

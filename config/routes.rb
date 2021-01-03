@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
   end
   namespace :api do
+    post 'invitations', to: 'invitations#create'
     resources :staffs
     resources :clients do
       collection do
