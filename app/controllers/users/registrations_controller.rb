@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    flash.notice = 'Invitation code invalid.' if @invitation.nil?
+    flash.notice = 'Invitation code invalid.' if !params[:code].nil? && @invitation.nil?
     @invitation_code = @invitation&.code
     super do |resource|
       resource.email = @invitation&.email
