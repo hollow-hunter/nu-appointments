@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(version: 2020_12_27_232717) do
     t.string "code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "company_id"
+    t.bigint "company_id", null: false
     t.index ["code"], name: "index_clients_on_code", unique: true
+    t.index ["company_id"], name: "index_clients_on_company_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -46,9 +47,9 @@ ActiveRecord::Schema.define(version: 2020_12_27_232717) do
   end
 
   create_table "invitations", force: :cascade do |t|
-    t.string "code"
-    t.string "email"
-    t.datetime "expires_in"
+    t.string "code", null: false
+    t.string "email", null: false
+    t.datetime "expires_in", null: false
     t.bigint "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -71,13 +72,16 @@ ActiveRecord::Schema.define(version: 2020_12_27_232717) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "company_id"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "appointments", "clients"
   add_foreign_key "appointments", "staffs"
+  add_foreign_key "clients", "companies"
   add_foreign_key "invitations", "companies"
   add_foreign_key "staffs", "companies"
+  add_foreign_key "users", "companies"
 end
