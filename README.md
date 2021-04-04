@@ -5,9 +5,9 @@ This is a simple (currently) appointments web app for small businesses.
 
 It's being developed using:
 
-* Ruby 2.7.1
-* Yarn 1.22.4
-* Postgresql 12.4
+* Ruby 3.0.0
+* Yarn 1.22.10
+* Postgresql 13.2
 
 If you want to run it locally, make sure to set your local Postgresql credentials inside the development section of `config/database.yml` before running the db commands:
 
