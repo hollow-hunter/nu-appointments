@@ -1,5 +1,6 @@
 module Api
-  class InvitationsController < ActionController::API
+  class InvitationsController < ApiController
+    before_action :check_authorization!
     def create
       i = Invitation.new(invitation_params)
       i.company_id = current_user.company_id

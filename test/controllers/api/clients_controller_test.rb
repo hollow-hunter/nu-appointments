@@ -3,9 +3,8 @@ require 'json'
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
   test "index gets all clients from the user's company" do
-    current_user = users(:owner)
-    sign_in current_user
-    get api_clients_path
+    token = api_sign_in(users(:owner))
+    get api_clients_path, headers: { "Authorization": "Bearer #{token}" }
     assert_equal 1, JSON.parse(response.body).size, 'index included other clients'
   end
 
@@ -41,6 +40,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'show client' do
+    sign_in users(:owner)
     s = clients(:pato)
     get api_client_path(s.id)
     assert_response :ok
@@ -49,6 +49,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'edit client' do
+    sign_in users(:owner)
     s = clients(:pato)
     put api_client_path(s.id), params: { name: 'Edited Pato' }
     assert_response :ok
@@ -58,6 +59,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "edit client with another client's code" do
+    sign_in users(:owner)
     s = clients(:pato)
     lorem = clients(:lorem)
     put api_client_path(s.id), params: { name: 'Edited Pato', code: lorem.code }
@@ -67,6 +69,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get client by code' do
+    sign_in users(:owner)
     c = clients(:pato)
     get code_api_clients_path(c.code)
     assert_response :ok
@@ -75,6 +78,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get no_content by code when not found' do
+    sign_in users(:owner)
     get code_api_clients_path('usnln')
     assert_response :no_content
   end

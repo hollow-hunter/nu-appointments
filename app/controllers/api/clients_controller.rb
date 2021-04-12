@@ -1,6 +1,7 @@
 module Api
-  class ClientsController < ActionController::API
+  class ClientsController < ApiController
     before_action :set_client, only: %i[show update]
+    before_action :check_authorization!
     def index
       clients = Client.all.select { |c| c.company_id == current_user.company_id }
       render json: clients, status: :ok

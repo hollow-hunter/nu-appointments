@@ -2,9 +2,9 @@ require 'test_helper'
 
 class InvitationsControllerTest < ActionDispatch::IntegrationTest
   test 'should create invitation' do
-    current_user = users(:owner)
-    sign_in current_user
-    post api_invitations_path, params: { email: 'email@domain.com' }
+    token = api_sign_in(users(:owner))
+    post api_invitations_path, params: { email: 'email@domain.com' },
+                               headers: { "Authorization": "Bearer #{token}" }
     assert_response :created
   end
 

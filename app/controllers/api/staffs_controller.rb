@@ -1,6 +1,7 @@
 module Api
-  class StaffsController < ActionController::API
+  class StaffsController < ApiController
     before_action :set_staff, only: %i[show update]
+    before_action :check_authorization!
 
     def index
       all = Staff.all.select { |s| s.company_id == current_user.company_id }

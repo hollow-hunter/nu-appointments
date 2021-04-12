@@ -1,6 +1,7 @@
 module Api
-  class AppointmentsController < ActionController::API
+  class AppointmentsController < ApiController
     before_action :set_appointment, only: %i[edit update show]
+    before_action :check_authorization!
 
     def index
       appointments = Appointment.all.select { |a| a.staff.company_id == current_user.company_id }

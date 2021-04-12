@@ -1,5 +1,6 @@
 module Api
-  class CompaniesController < ActionController::API
+  class CompaniesController < ApiController
+    before_action :check_authorization!
     def create
       c = Company.new(company_params)
       if c.save
