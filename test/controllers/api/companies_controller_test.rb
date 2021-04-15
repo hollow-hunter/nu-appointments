@@ -14,4 +14,11 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
     c = JSON.parse(response.body)
     assert_equal c['id'], current_user.company_id
   end
+
+  test 'user cannot create company when it already has one' do
+    token = api_sign_in(users(:owner))
+    post api_companies_path, params: { name: 'new inc.' },
+                             headers: { "Authorization": "Bearer #{token}" }
+    assert_response :bad_request
+  end
 end

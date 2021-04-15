@@ -3,7 +3,7 @@ module Api
     before_action :check_authorization!
     def create
       c = Company.new(company_params)
-      if c.save
+      if current_user.company_id.nil? && c.save
         current_user.update company_id: c.id
         render json: c, status: :created
       else
