@@ -13,7 +13,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   def api_sign_in(user)
     app = oauth_applications(:minitest)
-    token = Doorkeeper::AccessToken.create!(application_id: app.id, resource_owner_id: user.id)
+    token = Doorkeeper::AccessToken.create!(application_id: app.id, resource_owner_id: user.id, scopes: app.scopes)
     token.token
   end
 end

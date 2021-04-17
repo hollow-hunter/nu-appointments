@@ -1,6 +1,13 @@
 module Api
   class CompaniesController < ApiController
-    before_action :check_authorization!
+    before_action only: %i[create] do
+      if doorkeeper_token
+        doorkeeper_authorize! :write
+      else
+        authenticate_user!
+      end
+    end
+
     def create
       c = Company.new(company_params)
       if current_user.company_id.nil? && c.save

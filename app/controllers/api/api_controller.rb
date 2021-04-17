@@ -2,10 +2,6 @@ module Api
   class ApiController < ActionController::API
     protected
 
-    def check_authorization!
-      doorkeeper_authorize! if current_user.nil?
-    end
-
     def current_user
       @devise_current_user ||= warden.authenticate(scope: :user)
       return @devise_current_user unless @devise_current_user.nil?

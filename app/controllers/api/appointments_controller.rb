@@ -1,7 +1,20 @@
 module Api
   class AppointmentsController < ApiController
     before_action :set_appointment, only: %i[edit update show]
-    before_action :check_authorization!
+    before_action only: %i[create update] do
+      if doorkeeper_token
+        doorkeeper_authorize! :write
+      else
+        authenticate_user!
+      end
+    end
+    before_action only: %i[index show] do
+      if doorkeeper_token
+        doorkeeper_authorize! :read
+      else
+        authenticate_user!
+      end
+    end
 
     def index
       appointments = Appointment.all.select { |a| a.staff.company_id == current_user.company_id }

@@ -38,6 +38,13 @@ module Api
       assert_response :created
     end
 
+    test 'correct staff creation with oauth2' do
+      token = api_sign_in(users(:owner))
+      post api_staffs_path, params: { name: 'Marie' },
+                            headers: { "Authorization": "Bearer #{token}" }
+      assert_response :created
+    end
+
     test 'show staff' do
       s = staffs(:one)
       current_user = users(:owner)
