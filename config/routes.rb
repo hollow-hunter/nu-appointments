@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  use_doorkeeper
+  use_doorkeeper do
+    controllers applications: 'oauth/applications'
+  end
   get 'invitations/new'
   get 'companies/new', to: 'companies#new'
   devise_for :users, controllers: { registrations: 'users/registrations' }
