@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   use_doorkeeper do
     controllers applications: 'oauth/applications'
+    controllers authorizations: 'oauth/authorizations'
   end
   get 'invitations/new'
   get 'companies/new', to: 'companies#new'
