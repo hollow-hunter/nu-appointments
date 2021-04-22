@@ -10,6 +10,13 @@ module Api
       assert_equal 1, JSON.parse(response.body).size, "index didn't get all staff"
     end
 
+    test 'index gets company staff with oauth2' do
+      token = api_sign_in(users(:owner))
+      get api_staffs_path, headers: { "Authorization": "Bearer #{token}" }
+      assert_response :success
+      assert_equal 1, JSON.parse(response.body).size, "index didn't get all staff"
+    end
+
     test "new can't create empty name staff" do
       current_user = users(:owner)
       sign_in current_user
@@ -28,6 +35,13 @@ module Api
       current_user = users(:owner)
       sign_in current_user
       post api_staffs_path, params: { name: 'Marie' }
+      assert_response :created
+    end
+
+    test 'correct staff creation with oauth2' do
+      token = api_sign_in(users(:owner))
+      post api_staffs_path, params: { name: 'Marie' },
+                            headers: { "Authorization": "Bearer #{token}" }
       assert_response :created
     end
 

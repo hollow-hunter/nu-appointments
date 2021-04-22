@@ -1,8 +1,16 @@
 module Api
-  class CompaniesController < ActionController::API
+  class CompaniesController < ApiController
+    before_action only: %i[create] do
+      if doorkeeper_token
+        doorkeeper_authorize! :write
+      else
+        authenticate_user!
+      end
+    end
+
     def create
       c = Company.new(company_params)
-      if c.save
+      if current_user.company_id.nil? && c.save
         current_user.update company_id: c.id
         render json: c, status: :created
       else

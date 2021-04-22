@@ -1,6 +1,20 @@
 module Api
-  class ClientsController < ActionController::API
+  class ClientsController < ApiController
     before_action :set_client, only: %i[show update]
+    before_action only: %i[create update] do
+      if doorkeeper_token
+        doorkeeper_authorize! :write
+      else
+        authenticate_user!
+      end
+    end
+    before_action only: %i[index show code] do
+      if doorkeeper_token
+        doorkeeper_authorize! :read
+      else
+        authenticate_user!
+      end
+    end
     def index
       clients = Client.all.select { |c| c.company_id == current_user.company_id }
       render json: clients, status: :ok

@@ -1,5 +1,13 @@
 module Api
-  class InvitationsController < ActionController::API
+  class InvitationsController < ApiController
+    before_action only: %i[create] do
+      if doorkeeper_token
+        doorkeeper_authorize! :write
+      else
+        authenticate_user!
+      end
+    end
+
     def create
       i = Invitation.new(invitation_params)
       i.company_id = current_user.company_id

@@ -87,6 +87,8 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    doorkeeper (5.5.1)
+      railties (>= 5)
     erubi (1.10.0)
     ffi (1.15.0)
     globalid (0.4.2)
@@ -245,6 +247,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise
+  doorkeeper
   jbuilder (~> 2.7)
   listen (~> 3.2)
   mailgun-ruby

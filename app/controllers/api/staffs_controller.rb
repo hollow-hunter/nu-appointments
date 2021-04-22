@@ -1,6 +1,20 @@
 module Api
-  class StaffsController < ActionController::API
+  class StaffsController < ApiController
     before_action :set_staff, only: %i[show update]
+    before_action only: %i[create update] do
+      if doorkeeper_token
+        doorkeeper_authorize! :write
+      else
+        authenticate_user!
+      end
+    end
+    before_action only: %i[index show] do
+      if doorkeeper_token
+        doorkeeper_authorize! :read
+      else
+        authenticate_user!
+      end
+    end
 
     def index
       all = Staff.all.select { |s| s.company_id == current_user.company_id }

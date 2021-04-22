@@ -13,10 +13,10 @@ class AppointmentsControllerTest < ActionDispatch::IntegrationTest
   test 'should create appointment' do
     c = clients(:pato)
     s = staffs(:one)
-    current_user = users(:owner)
-    sign_in current_user
+    token = api_sign_in(users(:owner))
     post api_appointments_path, params: { date: Date.new(2020, 9, 1), start_time: Time.new(2020, 9, 1, 10, 0, 0),
-                                          end_time: Time.new(2020, 9, 1, 11, 0, 0), client_id: c.id, staff_id: s.id }
+                                          end_time: Time.new(2020, 9, 1, 11, 0, 0), client_id: c.id, staff_id: s.id },
+                                headers: { "Authorization": "Bearer #{token}" }
     assert_response :created
     created = JSON.parse(response.body)
     assert_not_nil created['id']
