@@ -1,18 +1,24 @@
 <template>
 <div class="card card-primary">
   <div class="card-body p-0">
-    <label>Staff</label>
-    <select v-if="staffs" v-model="idStaff" id="staffSelector" class="form-control select2">
-      <option value="">All</option>
-      <option v-for="staff in staffs" :key="staff.id" :value="staff.id">{{staff.name}}</option>
-    </select>
-    <label>Status</label>
-    <select v-model="statusSelected" id="statusSelector" class="form-control select2">
-      <option value="">All</option>
-      <option value="pending">Pending</option>
-      <option value="done">Done</option>
-      <option value="cancelled">Cancelled</option>
-    </select>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <label>Staff</label>
+        <select v-if="staffs" v-model="idStaff" id="staffSelector" class="form-control select2">
+          <option value="">All</option>
+          <option v-for="staff in staffs" :key="staff.id" :value="staff.id">{{staff.name}}</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <label>Status</label>
+        <select v-model="statusSelected" id="statusSelector" class="form-control select2">
+          <option value="">All</option>
+          <option value="pending">Pending</option>
+          <option value="done">Done</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+    </div>
     <!-- THE CALENDAR -->
     <FullCalendar :key="appointmentsCount" :options="calendarOptions" />
   </div>
