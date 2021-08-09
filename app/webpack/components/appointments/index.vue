@@ -32,6 +32,7 @@ export default {
         dateClick: this.addEvent
       },
       appointmentsCount: 0,
+      appointments: null,
       idStaff: '',
       staffs: null
     }
@@ -40,23 +41,9 @@ export default {
     axios
       .get('/api/appointments')
       .then(response => {
-        this.appointmentsCount = response.data.length;
-        this.calendarOptions.events = response.data.map(e => {
-          let startDate = moment(e.date);
-          let endDate = moment(e.date);
-          let startTime = moment.utc(e.startTime);
-          let endTime = moment.utc(e.endTime);
-          return {
-            id: e.id,
-            url: '/appointments/' + e.id + '/edit',
-            title: e.id,
-            start: (startDate.add(startTime.hour(), 'h').add(startTime.minute(), 'm')).toDate(),
-            end: (endDate.add(endTime.hour(), 'h').add(endTime.minute(), 'm')).toDate(),
-            allDay: false,
-            backgroundColor: '#00c0ef', //Info (aqua)
-            borderColor: '#00c0ef' //Info (aqua)
-          }
-        });
+        this.appointments = response.data;
+        this.appointmentsCount = this.appointments.length;
+        this.loadEvents(this.appointments);
       })
       .catch(error => {
         if (error.response.status == 500) {
@@ -86,7 +73,34 @@ export default {
       });
     }
   },
+  watch:{
+    idStaff(newId, previousId) {
+      if (newId == '') {
+        this.loadEvents(this.appointments);
+      } else {
+        this.loadEvents(this.appointments.filter(a => a.staffId == newId));
+      }
+    }
+  },
   methods: {
+    loadEvents(appointments) {
+      this.calendarOptions.events = appointments.map(e => {
+          let startDate = moment(e.date);
+          let endDate = moment(e.date);
+          let startTime = moment.utc(e.startTime);
+          let endTime = moment.utc(e.endTime);
+          return {
+            id: e.id,
+            url: '/appointments/' + e.id + '/edit',
+            title: e.id,
+            start: (startDate.add(startTime.hour(), 'h').add(startTime.minute(), 'm')).toDate(),
+            end: (endDate.add(endTime.hour(), 'h').add(endTime.minute(), 'm')).toDate(),
+            allDay: false,
+            backgroundColor: '#00c0ef', //Info (aqua)
+            borderColor: '#00c0ef' //Info (aqua)
+          }
+        });
+    },
     addEvent(info) {
       window.location.href = '/appointments/new?datePreselected=' + info.dateStr;
     }
