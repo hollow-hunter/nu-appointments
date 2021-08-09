@@ -15,4 +15,8 @@ environment.plugins.prepend(
     Popper: ["popper.js", "default"] // for Bootstrap 4
   })
 );
+const customConfig = require('./custom-config')
+// before module export.
+environment.config.merge(customConfig)
+
 module.exports = environment
