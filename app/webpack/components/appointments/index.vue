@@ -1,6 +1,11 @@
 <template>
 <div class="card card-primary">
   <div class="card-body p-0">
+    <label>Staff</label>
+    <select v-if="staffs" required v-model="idStaff" id="staffSelector" class="form-control select2">
+      <option value="">All</option>
+      <option v-for="staff in staffs" :key="staff.id" :value="staff.id">{{staff.name}}</option>
+    </select>
     <!-- THE CALENDAR -->
     <FullCalendar :key="appointmentsCount" :options="calendarOptions" />
   </div>
@@ -12,6 +17,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import axios from 'axios'
 import toastr from 'toastr'
+import '../../stylesheets/appointments';
+require('select2')
 export default {
   components: {
     FullCalendar // make the <FullCalendar> tag available
@@ -24,7 +31,9 @@ export default {
         events: null,
         dateClick: this.addEvent
       },
-      appointmentsCount: 0
+      appointmentsCount: 0,
+      idStaff: '',
+      staffs: null
     }
   },
   mounted() {
@@ -55,6 +64,27 @@ export default {
         }
         console.log(error.response);
       });
+    axios
+      .get('/api/staffs')
+      .then(response => {
+        this.staffs = response.data;
+      })
+      .catch(error => {
+        if (error.response.status == 500) {
+          toastr.error("There was an error trying get the staffs.");
+        }
+        console.log(error.response);
+      });
+  },
+  updated() {
+    let vueInstance = this;
+    if (vueInstance.idStaff == '') {
+      $('#staffSelector').select2();
+      $('#staffSelector').on('select2:select', function(e) {
+        var data = e.params.data;
+        vueInstance.idStaff = data.id;
+      });
+    }
   },
   methods: {
     addEvent(info) {
