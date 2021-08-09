@@ -2,9 +2,16 @@
 <div class="card card-primary">
   <div class="card-body p-0">
     <label>Staff</label>
-    <select v-if="staffs" required v-model="idStaff" id="staffSelector" class="form-control select2">
+    <select v-if="staffs" v-model="idStaff" id="staffSelector" class="form-control select2">
       <option value="">All</option>
       <option v-for="staff in staffs" :key="staff.id" :value="staff.id">{{staff.name}}</option>
+    </select>
+    <label>Status</label>
+    <select v-model="statusSelected" id="statusSelector" class="form-control select2">
+      <option value="">All</option>
+      <option value="pending">Pending</option>
+      <option value="done">Done</option>
+      <option value="cancelled">Cancelled</option>
     </select>
     <!-- THE CALENDAR -->
     <FullCalendar :key="appointmentsCount" :options="calendarOptions" />
@@ -34,7 +41,8 @@ export default {
       appointmentsCount: 0,
       appointments: null,
       idStaff: '',
-      staffs: null
+      staffs: null,
+      statusSelected: ''
     }
   },
   mounted() {
@@ -72,14 +80,28 @@ export default {
         vueInstance.idStaff = data.id;
       });
     }
+    if (vueInstance.statusSelected == '') {
+      $('#statusSelector').select2();
+      $('#statusSelector').on('select2:select', function(e) {
+        var data = e.params.data;
+        vueInstance.statusSelected = data.id;
+      });
+    }
+  },
+  computed:{
+    filteredAppointments(){
+      let result = this.appointments;
+      result = result.filter(a => this.idStaff == '' || a.staffId == this.idStaff);
+      result = result.filter(a => this.statusSelected == '' || a.status == this.statusSelected);
+      return result;
+    }
   },
   watch:{
     idStaff(newId, previousId) {
-      if (newId == '') {
-        this.loadEvents(this.appointments);
-      } else {
-        this.loadEvents(this.appointments.filter(a => a.staffId == newId));
-      }
+      this.loadEvents(this.filteredAppointments);
+    },
+    statusSelected(newStatus, previousStatus) {
+      this.loadEvents(this.filteredAppointments);
     }
   },
   methods: {
