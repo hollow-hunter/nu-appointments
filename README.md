@@ -1,11 +1,11 @@
 # Appointments App
 
-This is a simple (currently) appointments web app for small businesses.    
+This is a simple appointments web app for small businesses.    
 [![Build Status](https://travis-ci.com/UribeNelson/nu-appointments.svg?branch=master)](https://travis-ci.com/UribeNelson/nu-appointments)
 
 It's being developed using:
 
-* Ruby 3.0.0
+* Ruby 3.0.2
 * Yarn 1.22.10
 * Postgresql 13.2
 
