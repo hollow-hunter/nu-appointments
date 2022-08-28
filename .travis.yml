@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 3.0.0
+  - 3.0.2
 services:
   - postgresql
 before_script:
@@ -12,9 +12,3 @@ branches:
   only:
     - master
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-deploy:
-  provider: heroku
-  run: "rails db:migrate"
-  on:
-    tags: true
-  api_key: $HEROKU_API_KEY
