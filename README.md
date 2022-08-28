@@ -1,7 +1,7 @@
 # Appointments App
 
 This is a simple appointments web app for small businesses.    
-[![Build Status](https://travis-ci.com/UribeNelson/nu-appointments.svg?branch=master)](https://travis-ci.com/UribeNelson/nu-appointments)
+[![Build Status](https://app.travis-ci.com/UribeNelson/nu-appointments.svg?branch=master)](https://app.travis-ci.com/UribeNelson/nu-appointments)
 
 It's being developed using:
 
