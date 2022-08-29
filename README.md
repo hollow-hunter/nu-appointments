@@ -2,6 +2,8 @@
 
 This is a simple appointments web app for small businesses.    
 [![Build Status](https://app.travis-ci.com/UribeNelson/nu-appointments.svg?branch=master)](https://app.travis-ci.com/UribeNelson/nu-appointments)
+[![Ruby on Rails CI](https://github.com/UribeNelson/nu-appointments/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/UribeNelson/nu-appointments/actions/workflows/rubyonrails.yml)
+[![Fly Deploy](https://github.com/UribeNelson/nu-appointments/actions/workflows/main.yml/badge.svg)](https://github.com/UribeNelson/nu-appointments/actions/workflows/main.yml)
 
 It's being developed using:
 
