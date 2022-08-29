@@ -1,7 +1,6 @@
-import * as Vue from 'vue';
 import NewInvitation from '../../components/invitations/new.vue';
+import { createApp } from 'vue'
 
-new Vue({
-  el: '#app',
-  components: { NewInvitation }
-})
+const app = createApp({})
+app.component('NewInvitation', NewInvitation)
+app.mount('#app')

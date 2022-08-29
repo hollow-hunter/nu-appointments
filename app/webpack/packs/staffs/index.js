@@ -1,7 +1,6 @@
-import * as Vue from 'vue'
 import Index from '../../components/staffs/index.vue'
+import { createApp } from 'vue'
 
-new Vue({
-  el: '#app',
-  components: { Index }
-})
+const app = createApp({})
+app.component('Index', Index)
+app.mount('#app')

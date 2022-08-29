@@ -1,7 +1,7 @@
 module.exports = {
   resolve: {
     alias: {
-      vue: 'vue'
+      vue: 'vue/dist/vue.esm-bundler.js'
     }
   }
 }

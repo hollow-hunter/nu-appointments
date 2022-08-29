@@ -1,7 +1,6 @@
-import * as Vue from 'vue';
 import NewCompany from '../../components/companies/new.vue';
+import { createApp } from 'vue'
 
-new Vue({
-  el: '#app',
-  components: { NewCompany }
-})
+const app = createApp({})
+app.component('NewCompany', NewCompany)
+app.mount('#app')

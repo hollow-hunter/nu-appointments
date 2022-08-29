@@ -1,7 +1,6 @@
-import * as Vue from 'vue';
 import NewAppointment from '../../components/appointments/new.vue';
+import { createApp } from 'vue'
 
-new Vue({
-  el: '#app',
-  components: { NewAppointment }
-})
+const app = createApp({})
+app.component('NewAppointment', NewAppointment)
+app.mount('#app')

@@ -1,7 +1,6 @@
-import * as Vue from 'vue'
 import EditStaff from '../../components/staffs/edit.vue'
+import { createApp } from 'vue'
 
-new Vue({
-  el: '#app',
-  components: { EditStaff }
-})
+const app = createApp({})
+app.component('EditStaff', EditStaff)
+app.mount('#app')
