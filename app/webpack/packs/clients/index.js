@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm.js'
+import * as Vue from 'vue'
 import Index from '../../components/clients/index.vue'
 
 new Vue({

@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm.js'
+import * as Vue from 'vue'
 import EditAppointment from '../../components/appointments/edit.vue'
 
 new Vue({

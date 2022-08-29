@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm.js';
+import * as Vue from 'vue';
 import NewInvitation from '../../components/invitations/new.vue';
 
 new Vue({

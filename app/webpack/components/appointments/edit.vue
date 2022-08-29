@@ -114,7 +114,7 @@
 import axios from 'axios'
 import toastr from 'toastr'
 require('select2')
-require('tempusdominus-bootstrap-4')
+// require('tempusdominus-bootstrap-4')
 import '../../stylesheets/appointments';
 export default {
   props: ['id'],
@@ -237,5 +237,5 @@ export default {
 }
 </script>
 <style lang="scss" media="screen">
-@import 'tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4';
+// @import 'admin-lte/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4';
 </style>

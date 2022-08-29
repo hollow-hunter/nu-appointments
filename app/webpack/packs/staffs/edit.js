@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm.js'
+import * as Vue from 'vue'
 import EditStaff from '../../components/staffs/edit.vue'
 
 new Vue({
